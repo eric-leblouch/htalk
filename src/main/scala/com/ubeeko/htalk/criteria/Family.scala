@@ -5,7 +5,7 @@ import scala.concurrent.duration._
 case class Family(value: String, options: FamilyOption*)
 
 object Family {
-  val Default = Family("d", Version(1))
+  val default = Family("d", Version(1))
 }
 
 sealed abstract class FamilyOption

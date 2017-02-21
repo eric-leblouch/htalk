@@ -30,12 +30,12 @@ class PutSpec extends FlatSpec with Matchers {
       cellsRowId should have size 2
       val cell1 = cellsRowId.head
       row(cell1) should equal("rowid")
-      family(cell1) should equal(Family.Default.value)
+      family(cell1) should equal(Family.default.value)
       qualifier(cell1) should equal("qualifier")
       cellValue(cell1) should equal("value")
       val cell2 = cellsRowId.tail.head
       row(cell2) should equal("rowid")
-      family(cell2) should equal(Family.Default.value)
+      family(cell2) should equal(Family.default.value)
       qualifier(cell2) should equal("qualifier")
       cellValue(cell2) should equal("value")
     }
@@ -50,7 +50,7 @@ class PutSpec extends FlatSpec with Matchers {
       cellsRowId should have size 1
       val cell1 = cellsRowId.head
       row(cell1) should equal("rowid")
-      family(cell1) should equal(Family.Default.value)
+      family(cell1) should equal(Family.default.value)
       qualifier(cell1) should equal("qualifier")
       cellValue(cell1) should equal("value")
       val cellsRowId2 = rows("rowid2")
@@ -84,7 +84,7 @@ class PutSpec extends FlatSpec with Matchers {
       val cells = assertTableAndGetRows(htalkcontext, "user", 1)("rowid")
       val cell = cells.head
       row(cell) should equal("rowid")
-      family(cell) should equal(Family.Default.value)
+      family(cell) should equal(Family.default.value)
       qualifier(cell) should equal("qualifier")
       cellValue(cell) should equal("value1")
     }

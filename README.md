@@ -2,6 +2,7 @@ HTalk
 =====
 
 [![Build Status](https://travis-ci.org/eric-leblouch/htalk.svg?branch=master)](https://travis-ci.org/eric-leblouch/htalk)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/02f03a74561649aaa9d033ce94eca6c3)](https://www.codacy.com/app/eric-leblouch/htalk?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=eric-leblouch/htalk&amp;utm_campaign=Badge_Grade)
 
 Build
 -----

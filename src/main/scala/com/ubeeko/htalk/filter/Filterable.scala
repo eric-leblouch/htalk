@@ -57,7 +57,7 @@ trait Filterable[T <: Searchable[T]] { this: T =>
   def columnValue[V](qualifier: Qualifier, value: V, op: CompareFilter.CompareOp = CompareFilter.CompareOp.EQUAL)
                     (implicit conv: BytesConv[V]): T = {
     import com.ubeeko.htalk.criteria._
-    columnValue(Family.Default, qualifier, value, op)
+    columnValue(Family.default, qualifier, value, op)
   }
 
   def columnValue[V](family: Family, qualifier: Qualifier, value: V)(implicit conv: BytesConv[V]): T = {

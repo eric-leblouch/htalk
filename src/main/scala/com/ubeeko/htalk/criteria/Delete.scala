@@ -30,7 +30,7 @@ case class Delete(table:Table) extends HBaseOperation with Iterable[DeleteInform
   }
 
   def delete(rowkey: Rowkey, qualifier: Qualifier): Delete = {
-    entries += QualifierDelete(rowkey, Family.Default, qualifier)
+    entries += QualifierDelete(rowkey, Family.default, qualifier)
     this
   }
 

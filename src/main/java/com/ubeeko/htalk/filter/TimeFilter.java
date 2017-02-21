@@ -10,8 +10,8 @@ import org.apache.hadoop.hbase.util.Bytes;
 
 public class TimeFilter extends FilterBase {
 
-	Long start = 0L;
-	Long end = 0L;
+	private Long start = 0L;
+	private Long end = 0L;
 
 	public TimeFilter(Long start, Long end) {
 		this.start = start;

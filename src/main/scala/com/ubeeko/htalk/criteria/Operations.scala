@@ -1,10 +1,8 @@
 package com.ubeeko.htalk.criteria
 
 import com.ubeeko.htalk.hbase.HTalkContext
-import com.ubeeko.htalk.filter.Filterable
-import com.ubeeko.htalk.filter.TimeFilterable
-import org.apache.hadoop.hbase.filter.KeyOnlyFilter
-import org.apache.hadoop.hbase.filter.FilterList
+import com.ubeeko.htalk.filter.{Filterable, TimeFilterable}
+import org.apache.hadoop.hbase.filter.{KeyOnlyFilter, FilterList}
 import org.apache.hadoop.hbase.client.Mutation
 import org.apache.hadoop.hbase.TableNotFoundException
 import scala.collection.JavaConversions._
@@ -31,7 +29,7 @@ trait Searchable[T <: Searchable[T]] extends HBaseOperation with Filterable[T] w
   this: T =>
 
   private var _families: Map[Family, List[Array[Byte]]] = Map()  
-  private var _currentFamily = Family.Default
+  private var _currentFamily = Family.default
 
   def qualifiers(qualifiers: Array[Byte]*): T = {
     this._families = this._families updated (this._currentFamily, qualifiers ++: this._families.getOrElse(this._currentFamily, List()))

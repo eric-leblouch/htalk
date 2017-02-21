@@ -1,38 +1,23 @@
 package com.ubeeko.htalk.hbase
 
+import com.ubeeko.exceptions.NotImplementedOperation
+import com.ubeeko.htalk.bytesconv._
+
 import java.util.Date
 
-import com.ubeeko.htalk.bytesconv._
-import org.apache.hadoop.hbase.HTableDescriptor
-import org.apache.hadoop.hbase.client.HTableInterface
-import org.apache.hadoop.hbase.TableExistsException
-import org.apache.hadoop.hbase.TableName
-import org.apache.hadoop.hbase.client.HTableInterfaceFactory
-import org.apache.hadoop.conf.Configuration
-import com.ubeeko.exceptions.NotImplementedOperation
-import org.apache.hadoop.hbase.client.Get
-import org.apache.hadoop.hbase.HColumnDescriptor
-import org.apache.hadoop.hbase.Cell
-import org.apache.hadoop.hbase.client.Row
-import org.apache.hadoop.hbase.client.coprocessor.Batch
-import org.apache.hadoop.hbase.client.Result
-import org.apache.hadoop.hbase.client.Scan
-import org.apache.hadoop.hbase.client.ResultScanner
-import org.apache.hadoop.hbase.client.Put
 import java.io.IOException
-import org.apache.hadoop.hbase.client.Delete
-import org.apache.hadoop.hbase.client.RowMutations
-import org.apache.hadoop.hbase.client.Append
-import org.apache.hadoop.hbase.client.Increment
-import org.apache.hadoop.hbase.client.Durability
+
+import org.apache.hadoop.conf.Configuration
+import org.apache.hadoop.hbase._
+import org.apache.hadoop.hbase.client._
+import org.apache.hadoop.hbase.client.coprocessor.Batch
 import org.apache.hadoop.classification.InterfaceAudience
 import org.apache.hadoop.hbase.ipc.CoprocessorRpcChannel
-import org.apache.hadoop.hbase.CellUtil
-import com.google.protobuf.Service
+
 import org.scalatest.Matchers
+
+import com.google.protobuf.Service
 import com.ubeeko.htalk.criteria.Family
-import org.apache.hadoop.hbase.client.Table
-import org.apache.hadoop.hbase.client.BufferedMutator
 
 case class TestTable(desc: HTableDescriptor, var rows: Map[IndexedSeq[Byte], List[Cell]], var enabled: Boolean = true) extends TestHTable
 
@@ -50,7 +35,7 @@ trait TestHBaseManager extends HBaseManager {
   def isTableEnabled(name: TableName): Boolean = tables.get(name).map(_.enabled).getOrElse(false)
 
   def createTable(name: TableName,
-                   families: Seq[String] = Seq(Family.Default.value),
+                   families: Seq[String] = Seq(Family.default.value),
                    ignoreExisting: Boolean = false): Unit = {
     if (!tableExists(name)) {
       val desc = new HTableDescriptor(name)

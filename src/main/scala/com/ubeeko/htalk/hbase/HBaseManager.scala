@@ -61,7 +61,7 @@ class HBaseManagerInstance(config: Configuration)
   }
 
   def createTable(name: TableName,
-                   families: Seq[String] = Seq(Family.Default.value),
+                   families: Seq[String] = Seq(Family.default.value),
                    ignoreExisting: Boolean = false): Unit = {
     val hbaseAdmin = connection.getAdmin
     val tableDesc = new HTableDescriptor(name)

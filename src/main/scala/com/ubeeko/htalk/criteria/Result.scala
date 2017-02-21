@@ -20,9 +20,9 @@ case class Result(result: org.apache.hadoop.hbase.client.Result) {
   def getValue[Q](family: Family, qualifier: Q)(implicit convQ: BytesConv[Q]): ValueGetter[Q] =
     new ValueGetter(qualifier, family)
 
-  def getValue[Q](qualifier: Q)(implicit convQ: BytesConv[Q]): ValueGetter[Q] = getValue(Family.Default, qualifier)
+  def getValue[Q](qualifier: Q)(implicit convQ: BytesConv[Q]): ValueGetter[Q] = getValue(Family.default, qualifier)
 
-  class ValueGetter[Q](val qualifier: Q, val family: Family = Family.Default)(implicit convQ: BytesConv[Q]) {
+  class ValueGetter[Q](val qualifier: Q, val family: Family = Family.default)(implicit convQ: BytesConv[Q]) {
     def asOpt[R](implicit convR: BytesConv[R]): Option[R] =
       value(convQ(qualifier), family) map convR.apply
 
@@ -33,7 +33,7 @@ case class Result(result: org.apache.hadoop.hbase.client.Result) {
       }
   }
 
-  private def value(qualifier: Array[Byte], family: Family = Family.Default): Option[Array[Byte]] = {
+  private def value(qualifier: Array[Byte], family: Family = Family.default): Option[Array[Byte]] = {
     result.getColumnLatestCell(family.value, qualifier) match {
       case cname: HCell => Some(CellUtil.cloneValue(cname))
       case _ => None
@@ -42,7 +42,7 @@ case class Result(result: org.apache.hadoop.hbase.client.Result) {
 
   def getRow[R](implicit convR: BytesConv[R]): R = convR(result.getRow)
 
-  def getCells(family: Family = Family.Default): Map[Qualifier, Array[Byte]] = {
+  def getCells(family: Family = Family.default): Map[Qualifier, Array[Byte]] = {
     assert(result != null)
     result.getMap match {
       case null => Map.empty
